@@ -1,0 +1,41 @@
+name: Terraform validation
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.17.2
+          terraform_wrapper: false
+      - name: Check formatting
+        run: terraform fmt -check -recursive
+      - name: Initialize and validate environment roots
+        run: |
+          for env in dev pre pro; do
+            terraform -chdir="envs/$env" init -backend=false -input=false -lockfile=readonly
+            terraform -chdir="envs/$env" validate
+          done
+      - name: Validate and test module with a mock provider
+        run: |
+          terraform -chdir=modules/service-accounts init -backend=false -input=false -lockfile=readonly
+          terraform -chdir=modules/service-accounts validate
+          terraform -chdir=modules/service-accounts test
+      - name: Validate Atlantis configuration
+        run: |
+          python -m pip install PyYAML==6.0.2
+          python scripts/validate_atlantis.py
+      - name: Scan Terraform configuration
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: .
+          framework: terraform
+          quiet: true

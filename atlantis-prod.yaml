@@ -1,0 +1,12 @@
+version: 3
+
+autodiscover:
+  mode: disabled
+
+projects:
+  - name: pro-gsas
+    dir: envs/pro
+    workspace: default
+    terraform_version: v1.17.2
+    autoplan:
+      enabled: false

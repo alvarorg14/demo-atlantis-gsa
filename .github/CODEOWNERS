@@ -1,0 +1,5 @@
+/envs/pro/ @alvarorg14
+/modules/service-accounts/ @alvarorg14
+/atlantis-nonprod.yaml @alvarorg14
+/atlantis-prod.yaml @alvarorg14
+/.github/CODEOWNERS @alvarorg14

@@ -1,0 +1,29 @@
+version: 3
+
+autodiscover:
+  mode: disabled
+
+projects:
+  - name: dev-gsas
+    dir: envs/dev
+    workspace: default
+    terraform_version: v1.17.2
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - ".terraform.lock.hcl"
+        - "../../modules/service-accounts/**/*.tf"
+        - "../../atlantis-nonprod.yaml"
+
+  - name: pre-gsas
+    dir: envs/pre
+    workspace: default
+    terraform_version: v1.17.2
+    autoplan:
+      enabled: true
+      when_modified:
+        - "*.tf"
+        - ".terraform.lock.hcl"
+        - "../../modules/service-accounts/**/*.tf"
+        - "../../atlantis-nonprod.yaml"
