@@ -1,6 +1,6 @@
 # Service accounts module
 
-Creates one Google service account in the specified project. Declare a module block for each account. The `name` is the account ID and must satisfy the validation in `variables.tf`.
+Creates one Google service account in the specified project. Declare a module block for each account. The `name` is the account ID and must satisfy Google Cloud's service account ID requirements.
 
 ```hcl
 module "demo_api_dev" {

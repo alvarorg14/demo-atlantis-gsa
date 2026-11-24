@@ -33,10 +33,13 @@ run "grants_project_roles" {
   }
 }
 
-run "rejects_invalid_account_id" {
+run "accepts_name_without_demo_prefix" {
   command = plan
   variables {
-    name = "invalid"
+    name = "service-account"
   }
-  expect_failures = [var.name]
+  assert {
+    condition     = google_service_account.this.account_id == "service-account"
+    error_message = "Expected the configured account ID without a demo prefix."
+  }
 }
