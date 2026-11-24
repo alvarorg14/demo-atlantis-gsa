@@ -9,7 +9,10 @@ module "demo_api_dev" {
   name         = "demo-api-dev"
   display_name = "Demo API DEV"
   description  = "Demo API service account in DEV"
+  roles        = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
 }
 ```
 
-The `email`, `unique_id`, and `resource_name` outputs describe the account. No keys, IAM grants or other resources are created. `prevent_destroy` guards resources while this declaration exists; it is not an authorization boundary and removing the declaration removes the lifecycle rule. Execution identities lack delete and general update permissions, so metadata updates can fail. Renaming a module changes the resource address; use a reviewed `moved` block to preserve it. Changing an account ID can cause replacement. Use a separately reviewed privilege design for full lifecycle management.
+`roles` is an optional list of project-level IAM roles; it defaults to `[]`. Each distinct role is granted to the service account in `project_id` using a non-authoritative IAM member resource. Removing a role removes that managed grant. The runner needs permission to read and update the project's IAM policy, in addition to service-account administration permissions. No keys are created.
+
+The `email`, `unique_id`, and `resource_name` outputs describe the account. `prevent_destroy` blocks destruction or replacement while the module block remains. Removing the module block also removes that protection and plans deletion of the account and its managed role grants. Renaming a module changes the resource address; use a reviewed `moved` block to preserve it.

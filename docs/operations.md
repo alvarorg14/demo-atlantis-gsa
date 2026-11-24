@@ -10,7 +10,7 @@ Atlantis defaults to locking a project on plan when the server does not override
 
 ## Drift, imports and recovery
 
-Run an authorized Atlantis plan against a branch with the relevant project selected and inspect differences to detect drift. Do not apply a drift correction without review. Metadata drift may be impossible to correct with the create-only execution role.
+Run an authorized Atlantis plan against a branch with the relevant project selected and inspect differences to detect drift. Do not apply a drift correction without review. Verify that the execution identity has the permissions required for the planned service-account and project IAM changes.
 
 For a pre-existing account, first verify its project, ID and ownership and ensure it is not managed by another state. Add its module block, then use a reviewed Terraform import block in the appropriate root with the resource address `module.demo_api_dev.google_service_account.this` and import ID `projects/alvarorg14-demo-dev/serviceAccounts/demo-api-dev@alvarorg14-demo-dev.iam.gserviceaccount.com` (replace for the actual environment and account). Review the authenticated Atlantis plan to ensure it imports the intended resource and proposes no unintended changes. Apply through the normal process, then remove the temporary import block in a reviewed change. Import and refresh need sufficient existing permissions; resolve access through the platform owners rather than elevating this repository's identity.
 

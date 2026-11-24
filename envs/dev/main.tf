@@ -17,3 +17,12 @@ module "demo_worker_dev" {
   display_name = "Demo Worker DEV"
   description  = "Demo worker service account in DEV"
 }
+
+module "demo_observability_dev" {
+  source       = "../../modules/service-accounts"
+  project_id   = local.project_id
+  name         = "demo-observability-dev"
+  display_name = "Demo Observability DEV"
+  description  = "Demo observability service account in DEV"
+  roles        = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+}
