@@ -23,3 +23,9 @@ variable "description" {
   type        = string
   default     = "Managed by Terraform through Atlantis"
 }
+
+variable "roles" {
+  description = "Project IAM roles to grant to the service account."
+  type        = list(string)
+  default     = []
+}

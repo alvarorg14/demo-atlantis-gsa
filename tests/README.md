@@ -9,7 +9,7 @@ Perform the following in a controlled integration environment with authorized op
 - [ ] DEV and PRE changes independently trigger only their matching NoPRO projects; a shared module change triggers both.
 - [ ] PRO requires approval before planning and uses the approved, mergeable, undiverged apply workflow.
 - [ ] A user without impersonation permission cannot apply; PRO cannot create in DEV or access DEV/PRE state.
-- [ ] A runner cannot create a bucket, assign project IAM or create service-account keys.
-- [ ] Available lifecycle and IAM safeguards block a controlled destructive plan or operation; do not delete a real account.
+- [ ] Verify the runner can grant and remove an approved project role and cannot create a bucket or service-account keys unless explicitly authorized.
+- [ ] In a controlled environment, create and delete a disposable GSA and verify its managed grants are removed.
 - [ ] Two PRs planning the same project encounter Atlantis locking; verify safe lock release.
 - [ ] Server-side OPA policy tests are pending until platform-controlled OPA integration exists.
