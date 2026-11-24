@@ -10,10 +10,11 @@ module "demo_api_pre" {
   description  = "Demo API service account in PRE"
 }
 
-module "missing_prefix_pre" {
+module "demo_policy_test_pre" {
   source       = "../../modules/service-accounts"
   project_id   = local.project_id
-  name         = "policy-test-pre"
-  display_name = "Policy test PRE"
-  description  = "Negative test for the service account ID prefix policy"
+  name         = "demo-policy-test-pre"
+  display_name = "Demo policy test PRE"
+  description  = "Negative test for the service account role policy"
+  roles        = ["roles/viewer"]
 }
