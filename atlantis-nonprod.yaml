@@ -8,8 +8,6 @@ projects:
     dir: envs/dev
     workspace: default
     terraform_version: v1.17.2
-    repo_locks:
-      mode: on_plan
     autoplan:
       enabled: true
       when_modified:
@@ -22,8 +20,6 @@ projects:
     dir: envs/pre
     workspace: default
     terraform_version: v1.17.2
-    repo_locks:
-      mode: on_plan
     autoplan:
       enabled: true
       when_modified:

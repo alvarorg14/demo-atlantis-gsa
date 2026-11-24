@@ -8,7 +8,5 @@ projects:
     dir: envs/pro
     workspace: default
     terraform_version: v1.17.2
-    repo_locks:
-      mode: on_plan
     autoplan:
       enabled: false

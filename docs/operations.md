@@ -6,7 +6,7 @@ Both Atlantis GitHub Apps, server-side repository configuration, existing state 
 
 Add a module block in the desired root, run the README validation, and open a PR. Check the plan targets the correct project and contains only intended resources and actions. DEV/PRE autoplan is enabled; use `atlantis-nonprod plan -p dev-gsas` or `atlantis-nonprod plan -p pre-gsas` when a manual plan is needed. Apply with `atlantis-nonprod apply -p dev-gsas` or `atlantis-nonprod apply -p pre-gsas` after review. For production obtain approval first, run `atlantis-prod plan -p pro-gsas`, review, then `atlantis-prod apply -p pro-gsas`. Server-side requirements still apply. Merge only after successful pre-merge apply.
 
-Atlantis locks a project on plan; competing PRs for that project should wait until its lock is released. Separate projects have separate locks. The GCS backend also locks state during operations. If an apply fails, inspect Atlantis output and state, correct the PR, re-plan and review before retrying; a partially completed apply can have created resources. Do not assume failure means no change occurred.
+Atlantis defaults to locking a project on plan when the server does not override that setting; competing PRs for that project should wait until its lock is released. Separate projects have separate locks. The GCS backend also locks state during operations. If an apply fails, inspect Atlantis output and state, correct the PR, re-plan and review before retrying; a partially completed apply can have created resources. Do not assume failure means no change occurred.
 
 ## Drift, imports and recovery
 

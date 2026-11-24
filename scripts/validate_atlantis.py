@@ -12,10 +12,9 @@ def validate(path, expected, autoplan):
     assert len(projects) == len(expected), path
     assert {project["name"] for project in projects} == set(expected), path
     for project in projects:
-        assert set(project) == {"name", "dir", "workspace", "terraform_version", "repo_locks", "autoplan"}, project
+        assert set(project) == {"name", "dir", "workspace", "terraform_version", "autoplan"}, project
         assert project["dir"] == expected[project["name"]], project
         assert project["workspace"] == "default" and project["terraform_version"] == "v1.17.2", project
-        assert project["repo_locks"] == {"mode": "on_plan"}, project
         assert project["autoplan"]["enabled"] is autoplan, project
         if autoplan:
             assert set(project["autoplan"]) == {"enabled", "when_modified"}, project
